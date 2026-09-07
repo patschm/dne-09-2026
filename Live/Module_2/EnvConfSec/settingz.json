@@ -1,0 +1,16 @@
+﻿{
+  "Hoi": "Wie ben jij nou weer",
+  "Jan": {
+    "Voornaam": "Jan",
+    "Achternaam": "Peters"
+  },
+  "Geheim": "Dit is geheim",
+  "Logging": {
+    "LogLevel": {
+      //"Default": "None",
+      "Hallo": "None",
+      "EnvConfSec.Program": "Error"
+    }
+  }
+
+}

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EnvConfSec": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "HELLO": "Hoi Wereld"
+      }
+    }
+  }
+}

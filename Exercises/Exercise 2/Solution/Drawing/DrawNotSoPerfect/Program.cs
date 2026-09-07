@@ -17,13 +17,25 @@ internal static class Program
     static void Main()
     {
         // TODO 2: Modify this code to wire up the Dependency Injection infrastructure.
+        var dip = new DefaultServiceProviderFactory();
+        var services = new ServiceCollection();
+        var bld =dip.CreateBuilder(services);
+        services.AddSingleton<Form, DrawMain>();
+        services.AddSingleton<IStorage, LocalFileStorage>();
+        var prov = bld.BuildServiceProvider();
+
+        var form = prov.GetRequiredService<Form>();
+
         // TODO 3: Register LocalFileStorage class in the Dependency Injector
 
         // TODO 5: Configure logging. Clear all log providers and add the Debug Provider
+        LoggerFactory.Create(c => {
+            c.AddConsole();
+        });
         // (writes output to "Output" window in Visual Studio).
         ApplicationConfiguration.Initialize();
-        var host = CreateHostBuilder().Build();
-        var form = host.Services.GetRequiredService<DrawMain>();
+        //var host = CreateHostBuilder().Build();
+        //var form = host.Services.GetRequiredService<DrawMain>();
         //IStorage stor = host.Services.GetRequiredService<IStorage>();
         //var form = new DrawMain(stor);
         Application.Run(form);
