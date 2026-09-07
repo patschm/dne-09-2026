@@ -27,15 +27,20 @@ internal static class Program
         services.AddSingleton<IStorage, LocalFileStorage>();
 
         // TODO 5: Configure logging. Clear all log providers and add the Debug Provider
-        var loggerFactory = LoggerFactory.Create(c =>
-        {
+        //var loggerFactory = LoggerFactory.Create(c =>
+        //{
+        //    c.ClearProviders();
+        //    c.AddConsole();
+
+        //});
+        //services.AddSingleton(loggerFactory);
+        //services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
+
+        services.AddLogging(c => {
             c.ClearProviders();
             c.AddConsole();
-
         });
-        services.AddSingleton(loggerFactory);
-        services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
-        
+
         var prov = bld.BuildServiceProvider();
 
         // (writes output to "Output" window in Visual Studio).
