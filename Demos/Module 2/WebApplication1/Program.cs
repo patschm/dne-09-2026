@@ -11,7 +11,7 @@ namespace WebApplication1
             foreach (var item in builder.Services) {
                 Console.WriteLine(item?.ImplementationType?.Name);
             }
-
+            //builder.Configuration
             builder.Logging.AddConsole();
 
             // Add services to the container.

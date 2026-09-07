@@ -21,26 +21,34 @@ internal static class Program
         var services = new ServiceCollection();
         var bld =dip.CreateBuilder(services);
         services.AddSingleton<Form, DrawMain>();
-        services.AddSingleton<IStorage, LocalFileStorage>();
-        var prov = bld.BuildServiceProvider();
-
-        var form = prov.GetRequiredService<Form>();
+        
 
         // TODO 3: Register LocalFileStorage class in the Dependency Injector
+        services.AddSingleton<IStorage, LocalFileStorage>();
 
         // TODO 5: Configure logging. Clear all log providers and add the Debug Provider
-        LoggerFactory.Create(c => {
+        var loggerFactory = LoggerFactory.Create(c =>
+        {
+            c.ClearProviders();
             c.AddConsole();
+
         });
+        services.AddSingleton(loggerFactory);
+        services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
+        
+        var prov = bld.BuildServiceProvider();
+
         // (writes output to "Output" window in Visual Studio).
         ApplicationConfiguration.Initialize();
+
+        var form = prov.GetRequiredService<Form>();
         //var host = CreateHostBuilder().Build();
         //var form = host.Services.GetRequiredService<DrawMain>();
         //IStorage stor = host.Services.GetRequiredService<IStorage>();
         //var form = new DrawMain(stor);
         Application.Run(form);
     }
-    
+
     private static IHostBuilder CreateHostBuilder()
     {
         return Host.CreateDefaultBuilder()
