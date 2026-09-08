@@ -17,9 +17,9 @@ public class Program
     static void Main(string[] args)
     {
         //BasicClientAsync();
-        //DIClient();
+        DIClient();
         //StrongClient();
-        PostClient();
+        //PostClient();
        //AuthClient();
         Console.ReadLine();
     }
