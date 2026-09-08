@@ -15,14 +15,21 @@ public partial class CalculatorApp : Form
     {
         if (int.TryParse(txtA.Text, out int a) && int.TryParse(txtB.Text, out int b))
         {
-            var t1 = new Task<int>(() => LongAdd(a, b));
-            t1.ContinueWith(t => _main.Post(UpdateAnswer, t.Result));
-            t1.Start();
+            var result = await LongAddAsync(a, b);
+           // var result = DoeIets(a, b).Result; // Dead lock
+            UpdateAnswer(result);
+            //var t1 = new Task<int>(() => LongAdd(a, b));
+            //t1.ContinueWith(t => _main.Post(UpdateAnswer, t.Result));
+            //t1.Start();
             //int result = LongAdd(a, b);
             //UpdateAnswer(result);
         }
     }
 
+    private async Task<int> DoeIets(int a, int b)
+    {
+        return await LongAddAsync(a, b);
+    }
     private void UpdateAnswer(object? result)
     {
         lblAnswer.Text = result?.ToString();
@@ -32,5 +39,9 @@ public partial class CalculatorApp : Form
     {
         Task.Delay(10000).Wait();
         return a + b;
+    }
+    private Task<int> LongAddAsync(int a, int b)
+    {
+        return Task.Run(()=>LongAdd(a, b));
     }
 }
