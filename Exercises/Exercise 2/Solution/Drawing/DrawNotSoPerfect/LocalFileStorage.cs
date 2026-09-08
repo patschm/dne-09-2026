@@ -9,7 +9,7 @@ namespace DrawNotSoPerfect;
 // Test the application. Open or save some data and check the Output Window in VS2022
 public class LocalFileStorage : IStorage
 {
-    private ILogger<LocalFileStorage> _logger = NullLogger<LocalFileStorage>.Instance;
+    private readonly ILogger<LocalFileStorage> _logger = NullLogger<LocalFileStorage>.Instance;
     private string? _currentFile = null;
     // TODO 6: Inject an instance of the ILogger<LocalFileStorage> here
     public LocalFileStorage(ILogger<LocalFileStorage> logger)

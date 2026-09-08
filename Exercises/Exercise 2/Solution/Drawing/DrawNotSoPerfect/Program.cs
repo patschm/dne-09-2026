@@ -22,6 +22,7 @@ internal static class Program
         var bld =dip.CreateBuilder(services);
         services.AddSingleton<Form, DrawMain>();
         
+        
 
         // TODO 3: Register LocalFileStorage class in the Dependency Injector
         services.AddSingleton<IStorage, LocalFileStorage>();
@@ -38,7 +39,7 @@ internal static class Program
 
         services.AddLogging(c => {
             c.ClearProviders();
-            c.AddConsole();
+            c.AddDebug();
         });
 
         var prov = bld.BuildServiceProvider();
@@ -50,7 +51,7 @@ internal static class Program
         //var host = CreateHostBuilder().Build();
         //var form = host.Services.GetRequiredService<DrawMain>();
         //IStorage stor = host.Services.GetRequiredService<IStorage>();
-        //var form = new DrawMain(stor);
+       // var form = new DrawMain(stor);
         Application.Run(form);
     }
 
