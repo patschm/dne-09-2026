@@ -4,17 +4,58 @@ namespace Threadings;
 
 internal class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
+        AppDomain.CurrentDomain.UnhandledException += (o, e) => Console.WriteLine(e.ExceptionObject);
         Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("nl-NL");
         Console.WriteLine(Thread.CurrentThread.CurrentCulture);
+        Console.WriteLine($"ThreadID = {Thread.CurrentThread.ManagedThreadId}");
         // SynchronousDemo();
         //ASynchronousDemo1();
         //ASynchronousDemo2();
         //ASynchronousDemo3();
-        ASynchronousDemo4();
+        //ASynchronousDemo4();
+        //int res = await ASynchronousDemoHip();
+        try
+        {
+            //AsynErrorsDemo().ContinueWith(pt => {
+            //    Console.WriteLine(pt.Status);
+            //    Console.WriteLine(pt.Exception);
+            //});
+            int res = await LongAddAsync(6, 7);
+            Console.WriteLine(res);
+            await AsynErrorsDemo();
+           
+        }
+        catch (Exception ex) 
+        {
+            Console.WriteLine(ex.Message);
+        }
         Console.WriteLine($"We zijn aan het eind van de hoofddraad gekomen {3.14}");
         Console.ReadLine();
+    }
+
+    private static Task AsynErrorsDemo()
+    {
+        return Task.Run(() => {
+            Console.WriteLine("Doe Iets");
+            Task.Delay(1000).Wait();
+            throw new Exception("Ooops");
+        });
+    }
+
+    private static async Task<int> ASynchronousDemoHip()
+    {
+        var t2 = Task.Run<int>(() => LongAdd(2, 3));
+        int result = await t2;
+        Console.WriteLine(result);
+        Console.WriteLine("En we gaan door..");
+        result = await Task.Run(() => LongAdd(5, 6));
+        Console.WriteLine(result);
+
+
+        return 42;
+
     }
 
     private static void ASynchronousDemo4()
@@ -95,7 +136,12 @@ internal class Program
 
     static int LongAdd(int a, int b)
     {
+        Console.WriteLine($"ThreadID = {Thread.CurrentThread.ManagedThreadId}");
         Task.Delay(5000).Wait();
         return a + b;
+    }
+    static Task<int> LongAddAsync(int a, int b)
+    {
+        return Task.Run<int>(() => LongAdd(2, 3));
     }
 }
