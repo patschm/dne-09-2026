@@ -40,7 +40,7 @@ internal class Program
         p2.FirstName = "Marieke";
         p2.LastName = "Hendriks";
         //p2.Age = 23;
-        p2._age = 23;
+        p2.Age = 23;
         p2.Introduce();
 
 
