@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Garbage/Garbage.csproj" />
+  <Project Path="Reflector/Reflector.csproj" />
+  <Project Path="SomeLibrary/SomeLibrary.csproj" />
+</Solution>
