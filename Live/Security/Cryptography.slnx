@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Confidentiality/Confidentiality.csproj" Id="d841bf04-c016-4493-a9bc-67e722775d22" />
+  <Project Path="Echie/Echie.csproj" Id="4507fdf9-459d-4773-9b46-379b0780ecf8" />
+  <Project Path="Integrity/Integrity.csproj" />
+</Solution>
