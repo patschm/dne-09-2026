@@ -8,6 +8,8 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        Task.Delay(5000).ContinueWith(t => Console.WriteLine("Daar zijn we dan"));
+
         X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine, OpenFlags.ReadOnly);
         foreach(X509Certificate2 cert in store.Certificates)
         {
@@ -23,5 +25,7 @@ internal class Program
         RSA rsa2 = cert2.GetRSAPrivateKey();
         byte[] dataaa = rsa2.Decrypt(cipher, RSAEncryptionPadding.OaepSHA1);
         Console.WriteLine(Encoding.UTF8.GetString(dataaa));
+
+        Console.ReadLine();
     }
 }
